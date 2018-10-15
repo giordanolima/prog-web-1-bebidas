@@ -58,4 +58,21 @@ public class BebidasDAO {
         return retorno;
     }
 
+    public void inserirBebida(Bebidas bebida) throws SQLException {
+        
+        // Consulta SQL que será executada dentro do Banco de Dados
+        String consulta = "INSERT INTO bebidas (nome, categoria, valor) VALUES (?,?,?)";
+        //Instância do PreparedStatement que executará a consulta
+        PreparedStatement sql = this.conn.prepareStatement(consulta);
+        
+        // Setando os valores vindo dentro da instância "bebida" para dentro da consulta SQL
+        sql.setString(1, bebida.getNome());
+        sql.setString(2, bebida.getCategoria());
+        sql.setFloat(3, bebida.getValor());
+        
+        sql.execute();
+        
+        
+    }
+    
 }

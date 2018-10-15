@@ -15,6 +15,7 @@
     </head>
     <body>
         <h1>TADSBD</h1>
+        <a href="cadastrar_bebida.jsp">Cadastrar bebida</a>
         <table border='1'>
             <% for( Bebidas bebida : lista ) { %>
             <tr>
