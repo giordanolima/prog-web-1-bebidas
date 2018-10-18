@@ -15,6 +15,7 @@
     </head>
     <body>
         <h1>TADSBD</h1>
+        <a href="cadastrar_carro.jsp">Cadastrar novo carro</a>
         <table border='1'>
             <% for( Carros carro : lista ) { %>
             <tr>

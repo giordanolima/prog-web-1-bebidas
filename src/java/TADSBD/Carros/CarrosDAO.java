@@ -60,4 +60,17 @@ public class CarrosDAO {
         return retorno;
     }
     
+    public void inserirCarro(Carros carro) throws SQLException {
+        
+        String consulta = "INSERT INTO carros (marca,modelo,portas,motor) VALUES (?,?,?,?)";
+        PreparedStatement sql = this.conn.prepareStatement(consulta);
+        
+        sql.setString(1, carro.getMarca());
+        sql.setString(2, carro.getModelo());
+        sql.setInt(3, carro.getPortas());
+        sql.setFloat(4, carro.getMotor());
+        
+        sql.execute();
+        
+    }
 }
