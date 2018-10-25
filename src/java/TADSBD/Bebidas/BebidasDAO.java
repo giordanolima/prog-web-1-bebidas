@@ -75,4 +75,37 @@ public class BebidasDAO {
         
     }
     
+    public Bebidas getById(int id) throws SQLException {
+        
+        String consulta = "SELECT * FROM bebidas WHERE id = ?";
+        PreparedStatement sql = this.conn.prepareStatement(consulta);
+        sql.setInt(1, id);
+        ResultSet resultado = sql.executeQuery();
+        resultado.next();
+        
+        String nome = resultado.getString("nome");
+        String categoria = resultado.getString("categoria");
+        float valor = resultado.getFloat("valor");
+        
+        Bebidas retorno = new Bebidas();
+        retorno.setId(id);
+        retorno.setNome(nome);
+        retorno.setCategoria(categoria);
+        retorno.setValor(valor);
+        
+        return retorno;
+    }
+
+    public void editarBebida(Bebidas bebida) throws SQLException {
+        
+        String consulta = "UPDATE bebidas SET nome = ?, categoria = ?, valor = ? WHERE id = ?";
+        PreparedStatement sql = this.conn.prepareStatement(consulta);
+        sql.setString(1, bebida.getNome());
+        sql.setString(2, bebida.getCategoria());
+        sql.setFloat(3, bebida.getValor());
+        sql.setInt(4, bebida.getId());
+        sql.execute();
+        
+    }
+
 }

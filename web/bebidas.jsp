@@ -23,6 +23,9 @@
                 <td><%= bebida.getNome() %></td>
                 <td><%= bebida.getCategoria() %></td>
                 <td><%= bebida.getValor() %></td>
+                <td>
+                    <a href="editar_bebida.jsp?id=<%= bebida.getId() %>">Editar</a>
+                </td>
             </tr>
             <% } %>
         </table>
