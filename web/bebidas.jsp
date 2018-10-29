@@ -26,6 +26,9 @@
                 <td>
                     <a href="editar_bebida.jsp?id=<%= bebida.getId() %>">Editar</a>
                 </td>
+                <td>
+                    <a href="excluir_bebida.jsp?id=<%= bebida.getId() %>">Excluir</a>
+                </td>
             </tr>
             <% } %>
         </table>

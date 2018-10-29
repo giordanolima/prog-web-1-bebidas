@@ -22,6 +22,7 @@
                 <td><%= carro.getMarca() %></td>
                 <td><%= carro.getModelo() %></td>
                 <td><a href="editar_carro.jsp?id=<%= carro.getId() %>">Editar</a></td>
+                <td><a href="excluir_carro.jsp?id=<%= carro.getId() %>">Excluir</a></td>
             </tr>
             <% } %>
         </table>

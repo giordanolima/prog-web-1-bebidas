@@ -108,4 +108,10 @@ public class BebidasDAO {
         
     }
 
+    public void excluirBebida(int id) throws SQLException {
+        String consulta = "DELETE FROM bebidas WHERE id = ?";
+        PreparedStatement sql = this.conn.prepareStatement(consulta);
+        sql.setInt(1, id);
+        sql.execute();
+    }
 }
