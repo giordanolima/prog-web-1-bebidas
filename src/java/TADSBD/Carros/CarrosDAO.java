@@ -73,4 +73,33 @@ public class CarrosDAO {
         sql.execute();
         
     }
+    
+    public Carros getById(int id) throws SQLException {
+        String consulta = "SELECT * FROM carros WHERE id = ?";
+        PreparedStatement sql = this.conn.prepareStatement(consulta);
+        sql.setInt(1, id);
+        ResultSet resultado = sql.executeQuery();
+        resultado.next();
+        
+        Carros retorno = new Carros();
+        retorno.setId(id);
+        retorno.setMarca(resultado.getString("marca"));
+        retorno.setModelo(resultado.getString("modelo"));
+        retorno.setMotor(resultado.getFloat("motor"));
+        retorno.setPortas(resultado.getInt("portas"));
+        
+        return retorno;
+    }
+    
+    public void editarCarro(Carros carro) throws SQLException {
+        String consulta = "UPDATE carros SET marca = ?, modelo = ?, motor = ?, portas = ? WHERE id = ?";
+        PreparedStatement sql = this.conn.prepareStatement(consulta);
+        sql.setString(1, carro.getMarca());
+        sql.setString(2, carro.getModelo());
+        sql.setFloat(3, carro.getMotor());
+        sql.setInt(4, carro.getPortas());
+        sql.setInt(5, carro.getId());
+        
+        sql.execute();
+    }
 }
