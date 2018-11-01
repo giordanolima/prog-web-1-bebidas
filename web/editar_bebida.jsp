@@ -1,5 +1,6 @@
 <%@page import="TADSBD.Bebidas.Bebidas"%>
 <%@page import="TADSBD.Bebidas.BebidasDAO"%>
+<%@include file="check_login.jsp" %>
 <%
   
     int id = Integer.parseInt(request.getParameter("id"));

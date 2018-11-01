@@ -12,7 +12,11 @@
         <h2>Painel administrativo</h2>
         <p>
             <strong>Usuário logado: </strong>
-            <%= usuario %>
+            <%= usuario.getNome() %>
+        </p>
+        <p>
+            <strong>Senha do usuário logado: </strong>
+            <%= usuario.getSenha() %>
         </p>
         <p>
             <a href="bebidas.jsp">Bebidas</a>

@@ -1,5 +1,6 @@
 <%@page import="TADSBD.Carros.Carros"%>
 <%@page import="TADSBD.Carros.CarrosDAO"%>
+<%@include file="check_login.jsp" %>
 <%
   
     int id = Integer.parseInt(request.getParameter("id"));
