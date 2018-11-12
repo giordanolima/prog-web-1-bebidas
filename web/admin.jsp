@@ -22,6 +22,9 @@
             <a href="bebidas.jsp">Bebidas</a>
         </p>
         <p>
+            <a href="marcas.jsp">Marcas</a>
+        </p>
+        <p>
             <a href="carros.jsp">Carros</a>
         </p>
         <a href="logout.jsp">Sair</a>
