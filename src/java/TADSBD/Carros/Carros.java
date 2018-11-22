@@ -1,9 +1,11 @@
 package TADSBD.Carros;
 
+import TADSBD.Marcas.Marcas;
+
 public class Carros {
 
     private int id;
-    private String marca;
+    private Marcas marca;
     private String modelo;
     private int portas;
     private float motor;
@@ -16,11 +18,11 @@ public class Carros {
         this.id = id;
     }
 
-    public String getMarca() {
+    public Marcas getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public void setMarca(Marcas marca) {
         this.marca = marca;
     }
 

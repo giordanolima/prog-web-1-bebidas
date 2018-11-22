@@ -1,4 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="TADSBD.Marcas.Marcas"%>
+<%@page import="TADSBD.Marcas.MarcasDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    MarcasDAO dao = new MarcasDAO();
+    List<Marcas> marcas = dao.buscarMarcas();
+%>
 <%@include file="check_login.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -11,7 +18,13 @@
         <form method="POST" action="cad_carro.jsp">
             <div>
                 <label>Marca:</label>
-                <input type="text" name="marca" />
+                <select name="marca">
+                    
+                    <% for( Marcas marca : marcas ) { %>
+                    <option value="<%= marca.getId() %>"><%= marca.getNome() %></option>
+                    <% } %>
+                    
+                </select>
             </div>
             <div>
                 <label>Modelo:</label>

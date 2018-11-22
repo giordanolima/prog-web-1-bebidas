@@ -1,3 +1,6 @@
+<%@page import="TADSBD.Marcas.Marcas"%>
+<%@page import="java.util.List"%>
+<%@page import="TADSBD.Marcas.MarcasDAO"%>
 <%@page import="TADSBD.Carros.Carros"%>
 <%@page import="TADSBD.Carros.CarrosDAO"%>
 <%@include file="check_login.jsp" %>
@@ -6,6 +9,9 @@
     int id = Integer.parseInt(request.getParameter("id"));
     CarrosDAO dao = new CarrosDAO();
     Carros obj = dao.getById(id);
+    
+    MarcasDAO marcasdao = new MarcasDAO();
+    List<Marcas> marcas = marcasdao.buscarMarcas();
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,7 +27,22 @@
             <input type="hidden" name="id" value="<%= obj.getId() %>" />
             <div>
                 <label>Marca:</label>
-                <input type="text" name="marca" value="<%= obj.getMarca() %>" />
+                <select name="marca">
+                    
+                    <% for( Marcas marca : marcas ) { %>
+                    
+                    <option value="<%= marca.getId() %>"
+                            <% if(marca.getId() == obj.getMarca().getId()) { %>
+                            selected
+                            <% } %>
+                            >
+                        
+                        <%= marca.getNome() %>
+                    </option>
+                    
+                    <% } %>
+                    
+                </select>
             </div>
             <div>
                 <label>Modelo:</label>

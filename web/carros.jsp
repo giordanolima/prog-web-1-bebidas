@@ -19,7 +19,9 @@
         <table border='1'>
             <% for( Carros carro : lista ) { %>
             <tr>
-                <td><%= carro.getMarca() %></td>
+                <td>
+                    <%= carro.getMarca().getNome() %>
+                </td>
                 <td><%= carro.getModelo() %></td>
                 <td><a href="editar_carro.jsp?id=<%= carro.getId() %>">Editar</a></td>
                 <td><a href="excluir_carro.jsp?id=<%= carro.getId() %>">Excluir</a></td>

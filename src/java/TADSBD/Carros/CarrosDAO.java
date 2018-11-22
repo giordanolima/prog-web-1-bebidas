@@ -1,5 +1,7 @@
 package TADSBD.Carros;
 
+import TADSBD.Marcas.Marcas;
+import TADSBD.Marcas.MarcasDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,7 +32,8 @@ public class CarrosDAO {
     public ArrayList<Carros> buscarCarros() throws SQLException {
         
         // Criei a consulta SQL que será executada no banco
-        String sql = "SELECT * FROM carros";
+        String sql = "SELECT carros.*, marcas.nome";
+        sql += " FROM carros JOIN marcas ON carros.marca_id = marcas.id";
         
         // Criei a instância do objeto para executar o comando
         PreparedStatement consulta = this.conn.prepareStatement(sql);
@@ -42,17 +45,23 @@ public class CarrosDAO {
         while(resultado.next()) {
             
             int id = resultado.getInt("id");
-            String marca = resultado.getString("marca");
             String modelo = resultado.getString("modelo");
             int portas = resultado.getInt("portas");
             float motor = resultado.getFloat("motor");
             
             Carros carro =  new Carros();
             carro.setId(id);
-            carro.setMarca(marca);
             carro.setModelo(modelo);
             carro.setPortas(portas);
             carro.setMotor(motor);
+            
+            int marca_id = resultado.getInt("marca_id");
+            String marca_nome = resultado.getString("nome");
+            Marcas marca = new Marcas();
+            marca.setId(marca_id);
+            marca.setNome(marca_nome);
+            
+            carro.setMarca(marca);
             
             retorno.add(carro);
             
@@ -62,10 +71,10 @@ public class CarrosDAO {
     
     public void inserirCarro(Carros carro) throws SQLException {
         
-        String consulta = "INSERT INTO carros (marca,modelo,portas,motor) VALUES (?,?,?,?)";
+        String consulta = "INSERT INTO carros (marca_id,modelo,portas,motor) VALUES (?,?,?,?)";
         PreparedStatement sql = this.conn.prepareStatement(consulta);
         
-        sql.setString(1, carro.getMarca());
+        sql.setInt(1, carro.getMarca().getId());
         sql.setString(2, carro.getModelo());
         sql.setInt(3, carro.getPortas());
         sql.setFloat(4, carro.getMotor());
@@ -75,7 +84,9 @@ public class CarrosDAO {
     }
     
     public Carros getById(int id) throws SQLException {
-        String consulta = "SELECT * FROM carros WHERE id = ?";
+        String consulta = "SELECT carros.*, marcas.nome ";
+        consulta += "FROM carros JOIN marcas ON carros.marca_id = marcas.id ";
+        consulta += "WHERE carros.id = ?";
         PreparedStatement sql = this.conn.prepareStatement(consulta);
         sql.setInt(1, id);
         ResultSet resultado = sql.executeQuery();
@@ -83,18 +94,25 @@ public class CarrosDAO {
         
         Carros retorno = new Carros();
         retorno.setId(id);
-        retorno.setMarca(resultado.getString("marca"));
         retorno.setModelo(resultado.getString("modelo"));
         retorno.setMotor(resultado.getFloat("motor"));
         retorno.setPortas(resultado.getInt("portas"));
+        
+        int marca_id = resultado.getInt("marca_id");
+        String marca_nome = resultado.getString("nome");
+        Marcas marca = new Marcas();
+        marca.setId(marca_id);
+        marca.setNome(marca_nome);
+
+        retorno.setMarca(marca);
         
         return retorno;
     }
     
     public void editarCarro(Carros carro) throws SQLException {
-        String consulta = "UPDATE carros SET marca = ?, modelo = ?, motor = ?, portas = ? WHERE id = ?";
+        String consulta = "UPDATE carros SET marca_id = ?, modelo = ?, motor = ?, portas = ? WHERE id = ?";
         PreparedStatement sql = this.conn.prepareStatement(consulta);
-        sql.setString(1, carro.getMarca());
+        sql.setInt(1, carro.getMarca().getId());
         sql.setString(2, carro.getModelo());
         sql.setFloat(3, carro.getMotor());
         sql.setInt(4, carro.getPortas());
